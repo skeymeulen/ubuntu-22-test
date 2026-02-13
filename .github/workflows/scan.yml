@@ -6,5 +6,16 @@ jobs:
   scan:
     runs-on: ubuntu-22.04-arm
     steps: 
-      - name: Run scan
-        run: docker run --platform linux/amd64 --rm -v /var/run/docker.sock:/var/run/docker.sock aikidosecurity/local-scanner image-scan xxx --apikey xxx
+      - name: Download Aikido Local Scanner
+        run: |
+          curl -L -o aikido-local-scanner.zip \
+            https://aikido-local-scanner.s3.eu-west-1.amazonaws.com/v1.0.119/linux_ARM64/aikido-local-scanner.zip
+
+      - name: Unzip and make executable
+        run: |
+          unzip aikido-local-scanner.zip
+          chmod +x aikido-local-scanner
+
+      - name: Run Aikido image scan
+        run: |
+          ./aikido-local-scanner image-scan xxx --apikey xxx
