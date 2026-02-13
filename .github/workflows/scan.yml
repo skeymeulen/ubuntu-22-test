@@ -7,4 +7,4 @@ jobs:
     runs-on: ubuntu-22.04-arm
     steps: 
       - name: Run scan
-        run: docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aikidosecurity/local-scanner image-scan xxx --apikey xxx
+        run: docker run --platform linux/amd64 --rm -v /var/run/docker.sock:/var/run/docker.sock aikidosecurity/local-scanner image-scan xxx --apikey xxx
